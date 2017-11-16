@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -37,20 +39,27 @@ public class MainActivity extends AppCompatActivity {
         wordEditText = findViewById(R.id.wordEditText);
         resultTextView = findViewById(R.id.result);
         wordEditText.addTextChangedListener(new TextWatcher() {
+            private CharSequence word;
 
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                resultTextView.setText("word definition result");
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                word = charSequence;
+
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 //resultTextView.setText("");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(word.length()==0) {
+                    resultTextView.setText("word definition result");
+                }
+                else if (word.length() == 20){
+                    Toast.makeText(MainActivity.this, "已到达输入的最大长度！", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -63,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         String word = wordText.getText().toString();
         if(this.dictionary == null){
             readAllDefinition();
-            Log.v("TAG","null");
         }
        // String def = readDefinition(word);
         String def = this.dictionary.get(word);
