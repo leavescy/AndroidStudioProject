@@ -1,7 +1,9 @@
 package com.chenye.turtlegui;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i("Activity LifeCycle", "OnCreate was called");
         List<String> turtleList = new ArrayList<>();
         turtleList.add("Don");
         turtleList.add("Mike");
@@ -67,12 +70,78 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("Activity LifeCycle", "onStart was called");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i("Activity LifeCycle", "onRestart was called");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("Activity LifeCycle", "onResume was called");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("Activity LifeCycle", "onPause was called");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i("Activity LifeCycle", "onDestroy...1 was called");
+
+        super.onDestroy();
+        Log.i("Activity LifeCycle", "onDestroy...2 was called");
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("Activity LifeCycle", "onSaveInstanceState was called");
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i("Activity LifeCycle", "onRestoreInstanceState was called");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("Activity LifeCycle", "onStop was called");
+
+    }
+
     public void listChooseTurtle(AdapterView<?> adapterView, View view){
         ImageButton turtleImaBtn = findViewById(R.id.turtleImg);
 
     }
 
-/*
+    @Override
+    public void finish() {
+        Log.i("Activity LifeCycle", "finish...1 was called");
+
+        super.finish();
+        Log.i("Activity LifeCycle", "finish...2 was called");
+
+    }
+    /*
     public void chooseTurtle(View view) {
         ImageButton turtleImaBtn = findViewById(R.id.turtleImg);
         if(view.getId() == R.id.DonTurtle){
